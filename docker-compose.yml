@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  redis-stack:
+    image: redis/redis-stack
+    container_name: redis-stack-python
+    restart: on-failure
+    ports:
+      - "6380:6379"
+      - "8080:8001"
+    volumes:
+      - redis-stack-data:/data
+      - ./local-redis-stack.conf:/redis-stack.conf
+    networks:
+      - redis-stack
+    env_file:
+      - redis-stack.env 
+
+networks:
+  redis-stack:
+
+volumes:
+  redis-stack-data: {}
+
